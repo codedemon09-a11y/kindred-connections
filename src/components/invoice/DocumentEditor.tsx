@@ -15,6 +15,7 @@ import { SettingsPanel } from './SettingsPanel';
 import { DocumentPreview } from './DocumentPreview';
 import { SavedDocuments } from './SavedDocuments';
 import Footer from '@/components/Footer';
+import AdSense from '@/components/AdSense';
 import {
   FileText,
   FileCheck,
@@ -233,6 +234,17 @@ export const DocumentEditor = () => {
                 </p>
               </div>
             )}
+
+            {/* 
+              ============================================
+              ADSENSE AD PLACEMENT
+              ============================================
+              This ad is placed in the empty state section, between content.
+              It follows AdSense policies - away from nav/buttons/forms.
+            */}
+            <div className="mt-12 w-full max-w-3xl">
+              <AdSense />
+            </div>
           </div>
         ) : (
           /* Document Editor */

@@ -50,11 +50,10 @@ interface AdSenseProps {
 
 const AdSense = ({
   // ============================================
-  // PLACEHOLDER AD SLOT - REPLACE WITH YOUR REAL AD SLOT ID
-  // Get your ad slot from Google AdSense dashboard:
-  // Ads > By ad unit > Create new ad unit
+  // YOUR DISPLAY AD SLOT ID FROM ADSENSE DASHBOARD
+  // You can override this by passing a different adSlot prop
   // ============================================
-  adSlot = '1234567890',
+  adSlot = '1457837652',
   adFormat = 'auto',
   fullWidthResponsive = true,
   className = '',
