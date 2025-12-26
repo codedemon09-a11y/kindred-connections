@@ -10,6 +10,7 @@ interface TotalsSectionProps {
   cgstTotal: number;
   sgstTotal: number;
   igstTotal: number;
+  shippingCharges?: number;
   roundOff: number;
   grandTotal: number;
   amountInWords: string;
@@ -26,6 +27,7 @@ export const TotalsSection = ({
   cgstTotal,
   sgstTotal,
   igstTotal,
+  shippingCharges = 0,
   roundOff,
   grandTotal,
   amountInWords,

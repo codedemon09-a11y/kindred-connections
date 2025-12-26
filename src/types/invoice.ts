@@ -2,6 +2,24 @@ export type DocumentType = 'invoice' | 'quotation' | 'proforma' | 'bill';
 
 export type GSTRate = 0 | 5 | 12 | 18 | 28;
 
+export type TemplateStyle = 'minimal' | 'corporate' | 'modern' | 'traditional' | 'service';
+
+export type CurrencyCode = 'INR' | 'USD' | 'EUR' | 'GBP' | 'AED';
+
+export interface Currency {
+  code: CurrencyCode;
+  symbol: string;
+  name: string;
+}
+
+export const CURRENCIES: Currency[] = [
+  { code: 'INR', symbol: '₹', name: 'Indian Rupee' },
+  { code: 'USD', symbol: '$', name: 'US Dollar' },
+  { code: 'EUR', symbol: '€', name: 'Euro' },
+  { code: 'GBP', symbol: '£', name: 'British Pound' },
+  { code: 'AED', symbol: 'د.إ', name: 'UAE Dirham' },
+];
+
 export interface CompanySettings {
   name: string;
   address: string;
@@ -13,6 +31,7 @@ export interface CompanySettings {
   gstin: string;
   pan: string;
   logo?: string;
+  signature?: string;
   bankName: string;
   accountNumber: string;
   ifsc: string;
@@ -32,6 +51,8 @@ export interface CompanySettings {
     bill: number;
   };
   defaultGstRate: GSTRate;
+  defaultCurrency: CurrencyCode;
+  defaultTemplate: TemplateStyle;
 }
 
 export interface Client {
@@ -77,12 +98,15 @@ export interface Document {
   cgstTotal: number;
   sgstTotal: number;
   igstTotal: number;
+  shippingCharges: number;
   roundOff: number;
   grandTotal: number;
   amountInWords: string;
   paymentTerms: string;
   notes: string;
   isInterState: boolean;
+  currency: CurrencyCode;
+  template: TemplateStyle;
 }
 
 export const INDIAN_STATES = [
@@ -136,6 +160,14 @@ export const PAYMENT_TERMS = [
   'Net 60',
 ];
 
+export const TEMPLATE_STYLES: { value: TemplateStyle; label: string; description: string }[] = [
+  { value: 'minimal', label: 'Minimal', description: 'Clean and simple design' },
+  { value: 'corporate', label: 'Corporate', description: 'Professional business look' },
+  { value: 'modern', label: 'Modern', description: 'Contemporary sleek design' },
+  { value: 'traditional', label: 'Traditional GST', description: 'Classic Indian GST format' },
+  { value: 'service', label: 'Service Based', description: 'Ideal for service businesses' },
+];
+
 export const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
   name: '',
   address: '',
@@ -147,6 +179,7 @@ export const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
   gstin: '',
   pan: '',
   logo: undefined,
+  signature: undefined,
   bankName: '',
   accountNumber: '',
   ifsc: '',
@@ -166,4 +199,6 @@ export const DEFAULT_COMPANY_SETTINGS: CompanySettings = {
     bill: 1,
   },
   defaultGstRate: 18,
+  defaultCurrency: 'INR',
+  defaultTemplate: 'modern',
 };

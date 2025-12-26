@@ -98,12 +98,15 @@ export const useInvoiceStore = () => {
       cgstTotal: 0,
       sgstTotal: 0,
       igstTotal: 0,
+      shippingCharges: 0,
       roundOff: 0,
       grandTotal: 0,
       amountInWords: 'Rupees Zero Only',
       paymentTerms: 'Net 30',
       notes: '',
       isInterState: false,
+      currency: companySettings.defaultCurrency || 'INR',
+      template: companySettings.defaultTemplate || 'modern',
     };
 
     setCurrentDocument(newDoc);
