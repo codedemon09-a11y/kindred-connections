@@ -10,6 +10,7 @@ interface PartyDetailsProps {
   client: Client;
   onClientChange: (client: Client) => void;
   isPrintMode?: boolean;
+  partyLabel?: string;
 }
 
 export const PartyDetails = ({
@@ -17,20 +18,21 @@ export const PartyDetails = ({
   client,
   onClientChange,
   isPrintMode = false,
+  partyLabel = 'Customer',
 }: PartyDetailsProps) => {
   const updateClient = (field: keyof Client, value: string) => {
     onClientChange({ ...client, [field]: value });
   };
 
   return (
-    <div className="grid grid-cols-2 gap-8 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8">
       {/* Seller */}
-      <div className="glass rounded-2xl p-6 border border-border/50">
+      <div className="glass rounded-2xl p-4 sm:p-6 border border-border/50">
         <div className="flex items-center gap-2 mb-4">
           <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
             <Building2 className="h-4 w-4 text-primary" />
           </div>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Billed By</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Your Details</h3>
         </div>
         <div className="space-y-2">
           <p className="font-semibold text-foreground text-lg">{seller.name || 'Your Company'}</p>
@@ -51,13 +53,13 @@ export const PartyDetails = ({
         </div>
       </div>
 
-      {/* Buyer */}
-      <div className="glass rounded-2xl p-6 border border-border/50">
+      {/* Buyer/Supplier */}
+      <div className="glass rounded-2xl p-4 sm:p-6 border border-border/50">
         <div className="flex items-center gap-2 mb-4">
           <div className="h-8 w-8 rounded-lg bg-success/10 flex items-center justify-center">
             <User className="h-4 w-4 text-success" />
           </div>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Billed To</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{partyLabel} Details</h3>
         </div>
         {isPrintMode ? (
           <div className="space-y-2">
@@ -80,7 +82,7 @@ export const PartyDetails = ({
         ) : (
           <div className="space-y-3">
             <Input
-              placeholder="Client Name *"
+              placeholder={`${partyLabel} Name *`}
               value={client.name}
               onChange={(e) => updateClient('name', e.target.value)}
               className="h-10 rounded-xl bg-background/50"
